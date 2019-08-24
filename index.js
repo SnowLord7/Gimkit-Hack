@@ -43,7 +43,7 @@ let Session = new Exploit();
 
 setInterval(() => {
 
-	// Find the answer and click it every 100msg
+	// Find the answer and click it every 100ms
 	Session.answerQuestion();
 
 }, 100);
