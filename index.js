@@ -1,7 +1,5 @@
 /*
 
-	I just threw this together for @Mikarific#4167
-
 	Gimkit hack by Drew Snow
 
 	Fri Aug 23 2019 14:57:53 GMT-0700 (Pacific Daylight Time)
