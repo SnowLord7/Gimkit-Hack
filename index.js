@@ -8,6 +8,8 @@
 
 function Exploit () {
 
+	alert('Notice: This script is in beta and currently only works on demos.')
+	
 	this.getSpans = () => document.getElementsByTagName('span');
 
 	this.questions = window.questions;
