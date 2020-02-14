@@ -1,0 +1,1 @@
+javascript:(function()%7B(function()%20%7Blet%20x%20%3D%20document.createElement(%22script%22)%3Bx.src%20%3D%20%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSnowLord7%2FGimkit-Hack%40master%2Findex.js%22%3Bx.onload%20%3D%20function%20()%20%7B%20x.remove()%3B%20%7D%3Bdocument.body.appendChild(x)%3B%7D)()%7D)()
