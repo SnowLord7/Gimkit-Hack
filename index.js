@@ -61,7 +61,7 @@ function Exploit () {
         <div>Streak Bonus: <span name="inp_sb">$15</span></div>
         <div>Multiplier: <span name="inp_mp">$50</span></div>
     `;
-    document.body.appendChild(this.elem);
+    //document.body.appendChild(this.elem);
     
     this.initiate();
 }
@@ -129,7 +129,7 @@ Exploit.prototype.loop = function () {
         }
     }
 
-    this.update_shop();
+    //this.update_shop();
 };
 
 Exploit.prototype.initiate = function () {
