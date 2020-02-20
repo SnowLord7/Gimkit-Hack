@@ -172,6 +172,6 @@
         return document.querySelector('input');
     };
 
-    alert('GIMKIT SCRIPT V0.02\n- Drew Snow\n\nInstructions:\n‣ For text questions press any key inside the text box then click answer.\n‣ For multiple choice the correct answer should be underlined in red.\nThis script is still in beta, send me a message on discord if anything is not working correctly.');
-    let Session = new Exploit();
+    alert('GIMKIT SCRIPT V0.02\n- Drew Snow\n\nThis script will be "under development" until people stop complaining.\n\nInstructions:\n‣ For text questions press any key inside the text box then click answer.\n‣ For multiple choice the correct answer should be underlined in red.\nThis script is still in beta, send me a message on discord if anything is not working correctly.');
+    //let Session = new Exploit();
 })();
