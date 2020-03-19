@@ -4,11 +4,11 @@
         Gimkit hack by Drew Snow
 
         Created: Fri Aug 23 2019 14:57:53 GMT-0700 (Pacific Daylight Time)
-        Updated: Sat Feb 08 2020 17:02:00 GMT-0800 (Pacific Standard Time)
+        Updated: Thu Mar 19 2020 08:15:08 GMT-0700 (Pacific Daylight Time)
 
     */
 
-    function Exploit () {
+    let Exploit = function () {
         this.terms = {};
         this.game = {};
 
@@ -30,45 +30,57 @@
                 }, {
                     'name': 'Deflector',
                     'price': 60
-                },  {
+                }, {
                     'name': 'Rebooter',
                     'price': 1005
-                },  {
+                }, {
                     'name': 'Gift',
                     'price': 205
-                },  {
+                }, {
                     'name': 'Subtractor',
                     'price': 155
-                },  {
+                }, {
                     'name': 'Reducer',
                     'price': 135
-                },  {
+                }, {
                     'name': 'Discounter',
                     'price': 255
-                },  {
+                }, {
                     'name': 'Mini Bonus',
                     'price': 25
-                },  {
+                }, {
                     'name': 'Mega Bonus',
                     'price': 55
-                }, 
+                },
             ]
         };
 
-        this.elem = document.createElement('div');
+        /*this.elem = document.createElement('div');
         this.elem.style = `position: fixed; z-index: 2147483638; top: 60px; right: 0; border: 5px 0 0 5px;`;
         this.elem.innerHTML = `
             <div>Money Per Question: <span name="inp_mpq">$10</span></div>
             <div>Streak Bonus: <span name="inp_sb">$15</span></div>
             <div>Multiplier: <span name="inp_mp">$50</span></div>
         `;
-        //document.body.appendChild(this.elem);
+        document.body.appendChild(this.elem);*/
+
+        this.fetch = this.clean('fetch');
 
         this.initiate();
     }
 
+    Exploit.prototype.clean = function (key) {
+        let iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        let window = iframe.contentWindow;
+        iframe.parentNode.removeChild(iframe);
+        return window[key];
+    };
+
     Exploit.prototype.closest_number = function (number = 0, array = []) {
-        let arr = array.map(function(k) { return Math.abs(k - number) }),
+        let arr = array.map(function (k) { return Math.abs(k - number) }),
             min = Math.min.apply(Math, arr);
 
         return array[arr.indexOf(min)];
@@ -78,9 +90,9 @@
         let upgrades = this.shop,
             money = this.money();
 
-         document.querySelector('*[name="inp_mpq"]').textContent = '$' + this.closest_number(money, upgrades.MPQ);
-         document.querySelector('*[name="inp_sb"]').textContent = '$' + this.closest_number(money, upgrades.SB);
-         document.querySelector('*[name="inp_mp"]').textContent = '$' + this.closest_number(money, upgrades.Multi);
+        document.querySelector('*[name="inp_mpq"]').textContent = '$' + this.closest_number(money, upgrades.MPQ);
+        document.querySelector('*[name="inp_sb"]').textContent = '$' + this.closest_number(money, upgrades.SB);
+        document.querySelector('*[name="inp_mp"]').textContent = '$' + this.closest_number(money, upgrades.Multi);
     };
 
     Exploit.prototype.money = function () {
@@ -129,8 +141,6 @@
                 input.placeholder = answer.text;
             }
         }
-
-        //this.update_shop();
     };
 
     Exploit.prototype.initiate = function () {
@@ -143,14 +153,19 @@
     };
 
     Exploit.prototype.fetch_terms = function (gameId = '', callback = console.log) {
-        fetch('https://www.gimkit.com/api/games/fetch/' + gameId)
-            .then(e => e.json())
-            .then(e => {
-                this.game = e;
-                this.terms = e.kit.questions;
+        let req = new XMLHttpRequest();
+        req.open('GET', 'https://www.gimkit.com/api/games/fetch/' + gameId);
+        req.onreadystatechange = () => { 
+            if (req.readyState == 4 && req.status == 200) {
+                let json = JSON.parse(req.responseText);
 
-                if (callback) callback(e.kit.questions);
-            });
+                this.game = json;
+                this.terms = json.kit.questions;
+
+                if (callback) callback(json.kit.questions);
+            }
+        }
+        req.send();
     };
 
     Exploit.prototype.questions = function () {
@@ -172,6 +187,8 @@
         return document.querySelector('input');
     };
 
-    alert('GIMKIT SCRIPT V0.02\n- Drew Snow\n\nThis script will be "under development" until people stop complaining.\n\nInstructions:\n‣ For text questions press any key inside the text box then click answer.\n‣ For multiple choice the correct answer should be underlined in red.\nThis script is still in beta, send me a message on discord if anything is not working correctly.');
-    //let Session = new Exploit();
+    alert('GIMKIT SCRIPT V0.02\n- Drew Snow\n\nThis script is "under development" as people are still complaining about being kicked.\n\nInstructions:\n‣ For text questions press any key inside the text box then click answer.\n‣ For multiple choice the correct answer should be underlined in red.\n\nThis script is still in beta, send me a message on discord if anything is not working correctly.');
+    let Session = new Exploit();
+
+    return 'Script has been loaded.';
 })();
